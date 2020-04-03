@@ -115,6 +115,7 @@ hr {
   font-size: 20.0px;
   font-weight: 300;
   line-height: 20px;
+  margin: .5em auto 1em;
 }
 
 .color-green {
@@ -258,4 +259,22 @@ hr {
   font-size: small;
   white-space: nowrap;
   padding-top: 18px;
+}
+
+.title {
+  display:inline;
+}
+
+.help-icon {
+  color: white; 
+  display:inline; 
+  font-size: large;
+  margin-left: .5em; 
+  vertical-align: top; 
+  cursor: pointer;
+}
+
+
+.searchBox {
+  padding: 0.5em 0em 0em 0em !important;
 }

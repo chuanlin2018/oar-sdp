@@ -1,43 +1,53 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Input, NgZone } from '@angular/core';
 import { SelectItem, DropdownModule } from 'primeng/primeng';
 import { TaxonomyListService } from '../shared/taxonomy-list/index';
 import { SearchfieldsListService } from '../shared/searchfields-list/index';
-// import { SearchService } from '../shared/search-service/index'
 import { SearchService, SEARCH_SERVICE } from '../shared/search-service';
 import { Router, NavigationExtras } from '@angular/router';
 import * as _ from 'lodash';
 import { AppConfig, Config } from '../shared/config-service/config-service.service';
 import { timer } from 'rxjs/observable/timer';
 
-/**
- * This class represents the lazy loaded HomeComponent.
- */
 @Component({
-  selector: 'sdp-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css']
+  selector: 'app-search-panel',
+  templateUrl: './search-panel.component.html',
+  styleUrls: ['./search-panel.component.css']
 })
+export class SearchPanelComponent implements OnInit {
+  @Input() title: string;
+  @Input() subtitle: boolean;
+  @Input() helpicon: boolean = false;
+  @Input() advanceLink: boolean;
+  @Input() jumbotronPadding: string = '1em';
 
-export class HomeComponent implements OnInit {
   confValues: Config;
   errorMessage: string;
-  searchValue: string = '';
-  advSearchValue: string[];
+  _searchValue: string = '';
   taxonomies: SelectItem[];
   suggestedTaxonomies: string[];
   suggestedTaxonomyList: string[];
   searchTaxonomyKey: string;
-  display: boolean = false;
   queryAdvSearch: string = '';
-  showAdvancedSearch: boolean = false;
-  textRotate: boolean = true;
-  rows: any[];
-  fields: SelectItem[];
-  ALL: string = 'All Fields';
   operators: SelectItem[];
-  displayFields: any[] = ['Authors', 'contactPoint', 'description', 'DOI', 'Keyword', 'Publisher', 'Rights', 'Theme',
-    'Title'];
   SDPAPI: any;
+  imageURL: string;
+  mobHeight: number;
+  mobWidth: number;
+  placeholder: string;
+  display: boolean = false;
+  textRotate: boolean = true;
+  searchBottonWith: string = '10%';
+  breadcrumb_top: string = '6em';
+  placeHolderText: string[] = ['Kinetics database', 'Gallium', '"SRD 101"', 'XPDB', 'Interatomic Potentials'];
+  inputStyle: any = {'width': '100%','padding-left':'40px','height': '42px','font-weight': '400',
+                    'font-style': 'italic', 'border': '0px'};
+
+
+  get searchValue() : string { return this._searchValue};
+                    
+  set searchValue(searchValue: string){
+    this._searchValue = searchValue;
+  } 
 
   /**
    * Create an instance of services for Home
@@ -45,28 +55,90 @@ export class HomeComponent implements OnInit {
   constructor(@Inject(SEARCH_SERVICE) private searchService: SearchService,
     public taxonomyListService: TaxonomyListService, 
     public searchFieldsListService: SearchfieldsListService, 
+    ngZone: NgZone,
     // public searchService: SearchService, 
     private router: Router,
     private appConfig: AppConfig) {
+      var ts = new Date();
+      console.log("Home constructor starts", ts.toLocaleString());
     this.taxonomies = [];
     this.suggestedTaxonomies = [];
-    this.fields = [];
     this.confValues = this.appConfig.getConfig();
+
+    this.mobHeight = (window.innerHeight);
+    this.mobWidth = (window.innerWidth);
+
+    window.onresize = (e) => {
+      ngZone.run(() => {
+        this.mobWidth = window.innerWidth;
+        this.mobHeight = window.innerHeight;
+        this.onWindowResize();
+      });
+    };
   }
 
   /**
    *
    */
   ngOnInit() {
+    // Init search box size and breadcrumb position
+    this.onWindowResize();
+    console.log("Window width: ", window.screen.width);
+    var i = 0;
+    const source = timer(1000, 2000);
+    source.subscribe(val => {
+      if (i < this.placeHolderText.length) {
+        i++;
+        this.placeholder = this.placeHolderText[i];
+      } else {
+        this.placeholder = this.placeHolderText[0];
+        i = 0;
+      }
+    });
+
     this.SDPAPI = this.confValues.SDPAPI;
+    this.imageURL = this.confValues.SDPAPI + 'assets/images/sdp-background.jpg';
     this.getTaxonomies();
     this.getTaxonomySuggestions();
-    this.getSearchFields();
-    this.rows = [{}];
     this.searchOperators();
-    var placeHolder = ['Kinetics database', 'Gallium', '"SRD 101"', 'XPDB', 'Interatomic Potentials'];
-    var n = 0;
-    var loopLength = placeHolder.length;
+
+    console.log("helpicon", this.helpicon);
+  }
+
+
+  /**
+   * When window resized, we need to resize the search text box and reposition breadcrumb accordingly
+   * When top menu bar collapse, we want to place breadcrumb inside the top menu bar
+   */
+  onWindowResize(){
+    if(this.mobWidth > 461){
+      this.searchBottonWith = "10%";
+    }else{
+      this.searchBottonWith = "100%";
+    }
+
+    if(this.mobWidth > 750){
+      this.breadcrumb_top = '6em';
+    }else{
+      this.breadcrumb_top = '3.5em';
+    }
+  }
+
+  /**
+   *  Clear the search text box
+   */
+  clearText() {
+    var field = (<HTMLInputElement>document.getElementById('searchinput'));
+    if (!Boolean(this._searchValue.trim())) {
+      field.value = ' ';
+    }
+  }
+
+  addPlaceholder() {
+    var field = (<HTMLInputElement>document.getElementById('searchinput'));
+    if (!Boolean(this._searchValue)) {
+      field.value = '';
+    }
   }
 
   /**
@@ -127,38 +199,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
-  /**
-   * Get database fields for Advanced Search builder
-   */
-  getSearchFields() {
-    this.searchFieldsListService.get()
-      .subscribe(
-        fields => this.fields = this.toFieldItems(fields),
-        error => this.errorMessage = <any>error
-      );
-  }
-
-  /**
-   * Advanced Search fields dropdown
-   */
-  toFieldItems(fields: any[]) {
-    let items: SelectItem[] = [];
-    items.push({ label: this.ALL, value: 'All' });
-    let fieldItems: SelectItem[] = [];
-    //for (let field of fields) {
-    for (let field of this.displayFields) {
-      //Object.keys(fields).forEach(function(fieldKey) {
-      var fieldKey = _.startCase(field);
-      fieldItems.push({ label: fieldKey, value: field });
-    };
-    fieldItems = _.sortBy(fieldItems, ['label', 'value']);
-
-    fieldItems.unshift({ label: this.ALL, value: 'All' });
-
-    return fieldItems;
-  }
-
   /**
    * Define Search operators for the drop down
    */
@@ -184,18 +224,11 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * Display advanced search block
-   */
-  advancedSearch(advSearch: boolean) {
-    this.showAdvancedSearch = advSearch;
-  }
-
-  /**
    *  Pass Search example popup value to home screen
    */
   searchExample(popupValue: string) {
     this.display = false;
-    this.searchValue = popupValue;
+    this._searchValue = popupValue;
     this.textRotate = !this.textRotate;
   }
 }

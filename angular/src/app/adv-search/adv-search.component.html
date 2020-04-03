@@ -1,67 +1,59 @@
-<div class="ui-g" style="background-color: #153971;color: #FFFFFF">
-  <div class="ui-g-2">
-  </div>
-  <div class="ui-g-10">
-    <div class="EmptyBox20"></div>
-    <label id='title' style="font-size: xx-large;float: left;display: block;"><i
-        class="faa faa-cogs faa-lg"></i>Advanced Search Builder</label>
-    <ol class="breadcrumb" style="float: right;">
-      <li class="breadcrumb-item"><a href='#' style="color: #fff;" (click)="gaService.gaTrackPageview('/', 'homepage')">Home</a></li>
-      <li class="active breadcrumb-item">Advanced Search Builder</li>
-    </ol>
-    <div class="EmptyBox20"></div>
-  </div>
+<!-- Use absolute position for breadcrumb so it won't affect other elements' layout
+     We have onWindowResize() to dynamically adjust breadcrumb location -->
+<div style="position: absolute; right: 1em;"  [ngStyle]="{'top': breadcrumb_top}">
+  <ol class="breadcrumb" style="float: right;">
+    <li class="breadcrumb-item"><a href='#' style="color: #fff;"
+        (click)="gaService.gaTrackPageview('/', 'homepage')">Home</a></li>
+    <li class="active breadcrumb-item">Advanced Search Builder</li>
+  </ol>
 </div>
-<div class="ui-fluid" style="background-color: #EFEFEF">
-  <div class="ui-g ">
-    <div class="ui-g-12">
-      <div class="ui-g form-group">
-        <div class="ui-g-12 ui-lg-2 ui-md-1">
-        </div>
-        <div class="ui-g-12 ui-md-4" style="padding-right: 0px;padding-left: 0px;padding-bottom: 0px">
-          <label for="advsearchinput" class="hideLabel">Search Input</label>
-          <div class="inner-addon left-addon " style="background-color: #FFFFFF">
-            <i class="glyphicon faa faa-search"></i>
-            <p-autoComplete [inputStyle]="{'width': '100%','padding-left':'40px','height': '42px','font-weight': '400',
-        'font-style': 'italic'}" (onFocus)="clearText()" (onBlur)="addPlaceholder()" [placeholder]="placeholder"
-              [(ngModel)]="searchValue" inputId="advsearchinput"
-              (keyup.enter)="search(searchValue,searchTaxonomyKey,queryAdvSearch)" [suggestions]="suggestedTaxonomyList"
-              (completeMethod)="filterTaxonomies($event)" [minLength]="1" [maxlength]="2048" [size]="50">
+<app-search-panel title='Advanced Search Builder' [subtitle]='false' [helpicon]='true' [advanceLink]='false' jumbotronHeight='27vh' jumbotronPadding='2em 2em 0em 2em'></app-search-panel>
+
+<!-- Use Jumbotron for top search session
+     TODO: since multiple pages have search session and they look similar, we need to make it a separate component. -->
+<!-- <div class="jumbotron" [ngStyle]="{ 'background-image': 'url(' + imageURL + ')'}">
+  <div style="text-align: center; color: white;">
+    <div style="width: 100%;display: inline-block; margin: 1em auto 1em;">
+      <h3 style="display:inline;margin-right: 1em;">Advanced Search Builder</h3>
+      <a [routerLink]="['/help/how-advanced-search']" target="_blank">
+      <i class="faa faa-question-circle help-icon"  data-toggle="tooltip" title="How to build Advanced Search Queries"></i></a>
+    </div>
+
+    <div class="searchBox" style="margin-bottom: .5em;">
+        <label for="searchinput" class="hideLabel">Search Input</label>
+        <div class="inner-addon left-addon " style="background-color: #FFFFFF;display: inline-block; width: 40%;" [ngStyle]="{'width': searchBoxWith}">
+          <i class="glyphicon faa faa-search"></i>
+          <div>
+            <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="inputStyle" (onFocus)="clearText()"
+              (onBlur)="addPlaceholder()" [placeholder]="placeholder" [(ngModel)]="searchValue" inputId="searchinput"
+              name="searchinput"  (keyup.enter)="search(searchValue,searchTaxonomyKey,'yes')"
+              [suggestions]="suggestedTaxonomyList" (completeMethod)="filterTaxonomies($event)" [minLength]="1"
+              [maxlength]="2048" [size]="50">
             </p-autoComplete>
           </div>
-        </div>
-        <div class="ui-g-12 ui-lg-2 ui-md-4" style="padding-left: 0px;padding-right: 0px;padding-bottom: 0px">
-          <p-dropdown [options]="taxonomies" inputId="searchtaxonomy" [style]="{'width':'100%',
-        'background-color': '#FFFFFF','height': '42px'
-        ,'font-weight': '900','font-style': 'italic','display': 'flex','align-items':'center'}"
-            [(ngModel)]="searchTaxonomyKey">
-          </p-dropdown>
-        </div>
-        <div class="ui-g-12 ui-md-1" style="padding-left: 0px;padding-right: 0px;padding-bottom: 0px">
-          <button class="searchButton" (click)="search(searchValue,searchTaxonomyKey,'yes')" pButton label="Search"
-            type="submit"></button> </div>
-        <div class="ui-g-12 ui-md-2 how-to-build">
-          &nbsp;&nbsp;<a href="#!" class="how-to-build-link" [routerLink]="['/help/how-advanced-search']"
-            target="_blank">How to build Advanced Search Queries</a>
-        </div>
-
       </div>
-      <div class="ui-g-12 ui-md-2">
-      </div>
-      <div class="ui-g-12 ui-md-6">
-        <b> Examples: </b>
-        <a class="examples" (click)="$event.preventDefault();searchExample('&quot;Kinetics database&quot;');"
-          href="#!">"Kinetics database" </a>
-        &nbsp;
-        <a class="examples" (click)="$event.preventDefault();searchExample('Gallium');" href="#!">Gallium </a>&nbsp;
-        <a class="examples" (click)="$event.preventDefault();searchExample('&quot;SRD 101&quot;');" href="#!">"SRD 101"
-        </a>&nbsp;
-        <a class="examples" (click)="$event.preventDefault();searchExample('XPDB');" href="#!">XPDB </a>&nbsp;
-        <a class="examples" (click)="$event.preventDefault();searchExample('Interatomic Potentials');"
-          href="#!">Interatomic Potentials
-        </a>&nbsp;
+      <div class="bigSearchButton" style="display: inline-block;width: 10%;margin-top: -2px;min-width: 80px;" (click)="search(searchValue,searchTaxonomyKey,'yes')">
+        <p style="margin-top: 10px;">Search</p>
       </div>
     </div>
+    <div style="width: 100%; margin-bottom: 1em;">
+      <div style="text-align: center">
+        <b> <span class="examplesLabel"> Examples: </span></b>
+        <a class="examples" (click)="$event.preventDefault();searchExample('&quot;Kinetics database&quot;');"
+          href="#!">"Kinetics database" </a> &nbsp;
+        <a class="examples" (click)="$event.preventDefault();searchExample('Gallium');" href="#!">Gallium </a>&nbsp;
+        <a class="examples" id="srd101" (click)="$event.preventDefault();searchExample('&quot;SRD 101&quot;');"
+          href="#!">"SRD 101" </a>&nbsp;
+        <a class="examples" (click)="$event.preventDefault();searchExample('XPDB');" href="#!">XPDB </a>&nbsp;
+        <a class="examples" (click)="$event.preventDefault();searchExample('Interatomic Potentials');"
+          href="#!">Interatomic Potentials </a>&nbsp;
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="ui-fluid" style="background-color: #EFEFEF">
+  <div class="ui-g ">
     <p-confirmDialog key="queryDelete"></p-confirmDialog>
     <div class="ui-g-12 ui-md-3 ui-lg-3 collapse1 in width" id="demo"
       style="background-color: #F8F9F9;padding-left: 5px;">
@@ -148,15 +140,19 @@
     </div>
 
     <div [className]="resultsClass" style="background-color:white">
-      <div class="ui-g-12 ui-md-12" style="display: flex;vertical-align: middle;">
+      <div class="ui-g-12 ui-md-12" style="display: inline-block;vertical-align: middle;">
         <label for="queryName">Query Name : </label>
 
-        <input *ngIf="addQuery || editQuery" class="text-input" type="text" id="queryName"
-          style="width: 50%;border:.5px solid #e6e6e6;background-color: #FFFFFF;height: 25px;font-weight: 400;vertical-align:middle;margin-left:1em"
-          [(ngModel)]="queryName" (keydown)="onKeydown($event)" />
-        <div style="float:left;padding-left:1em;" *ngIf="!editQuery && !addQuery">{{this.queryName}}</div>
+        <input class="text-input" type="text" id="queryName"
+          [(ngModel)]="queryName" (keydown)="onKeydown($event)" [placeholder]="placeHolderText"/>
+        <!-- <div style="float:left;padding-left:1em;" *ngIf="!editQuery && !addQuery">{{this.queryName}}</div> -->
         <span *ngIf="queryNameReq" style="color:red;padding-left: 1em;">* Field is required</span>
         <span *ngIf="duplicateQuery" style="color:red;padding-left: 1em;">Query name already exists</span>
+
+        <button class="btn add-query-button" (click)="$event.preventDefault();createQueryInit()"
+        [disabled]="editQuery || addQuery" data-toggle="tooltip" title="Add Query">
+        <i class="faa faa-plus-circle faa-2x"></i> 
+        </button>
       </div>
       <div class="ui-g-12 ui-md-12 search-builder-background">
         <p-dataTable [value]="rows" emptyMessage="No entry found" [style]="{'border':'.5px solid #e6e6e6'}">

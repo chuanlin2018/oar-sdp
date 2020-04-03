@@ -1,26 +1,57 @@
-<style id="antiClickjack">
-  body {
-    display: none !important;
-  }
-</style>
-<script type="text/javascript">
-  if (self === top) {
-    var antiClickjack = document.getElementById("antiClickjack");
-    antiClickjack.parentNode.removeChild(antiClickjack);
-  } else {
-    top.location = self.location;
-  }
-</script>
+<app-search-panel title='' [subtitle]='false' [helpicon]='false' [advanceLink]='true' jumbotronPadding='1em 1em 0em 1em'></app-search-panel>
+<!-- <div class="jumbotron" [ngStyle]="{ 'background-image': 'url(' + imageURL + ')'}">
+  <div class="container" style="text-align: center; color: white;">
+    <div class="ui-g form-group">
+      <div class="ui-g-12 ui-lg-2 ui-md-0">
+      </div>
+      <div class="ui-g-12 ui-lg-6 ui-md-8 ui-sm-12 searchBox">
+        <label for="searchinput" class="hideLabel">Search Input</label>
+        <div class="inner-addon left-addon " style="background-color: #FFFFFF;">
+          <i class="glyphicon faa faa-search"></i>
+          <div>
+            <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="inputStyle" (onFocus)="clearText()"
+              (onBlur)="addPlaceholder()" [placeholder]="placeholder" [(ngModel)]="searchValue" inputId="searchinput"
+              name="searchinput"  (keyup.enter)="doSearch(searchValue,searchTaxonomyKey,queryAdvSearch)"
+              [suggestions]="suggestedTaxonomyList" (completeMethod)="filterTaxonomies($event)" [minLength]="1"
+              [maxlength]="2048" [size]="50">
+            </p-autoComplete>
+          </div>
 
+        </div>
+      </div>
+      <div class="ui-g-12 ui-lg-1 ui-md-1 bigSearchButton"
+        (click)="doSearch(searchValue,searchTaxonomyKey,queryAdvSearch)">
+        <p style="display: table-cell;">Search</p>
+      </div>
+      <div class="ui-g-12 ui-lg-2 ui-md-1" style="vertical-align: bottom !important;">
+        <a href="#!" class="advancedSearch-link" [routerLink]="['/advanced']"> Advanced Search </a>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <div style="text-align: center">
+        <b> <span class="examplesLabel"> Examples: </span></b>
+        <a class="examples" (click)="$event.preventDefault();searchExample('&quot;Kinetics database&quot;');"
+          href="#!">"Kinetics database" </a> &nbsp;
+        <a class="examples" (click)="$event.preventDefault();searchExample('Gallium');" href="#!">Gallium </a>&nbsp;
+        <a class="examples" id="srd101" (click)="$event.preventDefault();searchExample('&quot;SRD 101&quot;');"
+          href="#!">"SRD 101" </a>&nbsp;
+        <a class="examples" (click)="$event.preventDefault();searchExample('XPDB');" href="#!">XPDB </a>&nbsp;
+        <a class="examples" (click)="$event.preventDefault();searchExample('Interatomic Potentials');"
+          href="#!">Interatomic Potentials </a>&nbsp;
+      </div>
+    </div>
+  </div>
+</div> -->
 <div class="ui-fluid searchColor">
-  <div class="ui-g">
+  <!-- <div class="ui-g">
     <div class="ui-g-12 frontPanel" [ngStyle]="{ 'background-image': 'url(' + imageURL + ')'}">
       <div class="ui-g form-group">
         <div class="ui-g-12 ui-lg-2 ui-md-1">
         </div>
-        <div class="ui-g-12 ui-md-4" style="padding-right: 0px;padding-left: 0px;padding-bottom: 0px">
+        <div class="ui-g-12 ui-lg-6 ui-md-8" style="padding-right: 0px;padding-left: 0px;padding-bottom: 0px">
           <div class="inner-addon left-addon element " style="background-color: #FFFFFF;">
-            <i class="glyphicon faa faa-search" ></i><label for="searchinput" class="hideLabel">Search Input</label>
+            <i class="glyphicon faa faa-search"></i>
+            <label for="searchinput" class="hideLabel">Search Input</label>
             <p-autoComplete [inputStyle]="{'width': '100%','padding-left':'40px','height': '42px','font-weight': '400',
         'font-style': 'italic'}" [(ngModel)]="searchValue"
               (keyup.enter)="doSearch(searchValue,searchTaxonomyKey,queryAdvSearch)"
@@ -29,17 +60,12 @@
             </p-autoComplete>
           </div>
         </div>
-        <div class="ui-g-12 ui-lg-2 ui-md-4" style="padding-left: 0px;padding-right: 0px;padding-bottom: 0px">
-          <p-dropdown [options]="taxonomies" [style]="{'width':'100%','display': 'flex','align-items':'center',
-        'background-color': '#FFFFFF','height': '42px'
-        ,'font-weight': '900','font-style': 'italic'}" [(ngModel)]="searchTaxonomyKey">
-          </p-dropdown>
+        <div class="ui-g-12 ui-lg-1 ui-md-1 bigSearchButton"
+          (click)="doSearch(searchValue,searchTaxonomyKey,queryAdvSearch)">
+          <p style="display: table-cell; ">Search</p>
         </div>
-        <div class="ui-g-12 ui-md-1" style="padding-left: 0px;padding-right: 0px;padding-bottom: 0px">
-          <button class="searchButton" (click)="doSearch(searchValue,searchTaxonomyKey,queryAdvSearch)" pButton
-            label="Search" type="submit"></button> </div>
-        <div class="ui-g-12 ui-md-2">
-          &nbsp;&nbsp;<a href="#" [routerLink]="['/advanced']"
+        <div class="ui-g-12 ui-lg-2 ui-md-2">
+          &nbsp;&nbsp;<a href="#" class="advancedSearch-link" [routerLink]="['/advanced']"
             style="color: white;text-decoration: underline;display:table-cell;vertical-align: middle"> Advanced Search
           </a>
         </div>
@@ -58,19 +84,20 @@
           href="#">Interatomic Potentials </a>&nbsp;
       </div>
     </div>
-  </div>
+  </div> -->
   <div *ngIf="noResults">
     <div class="ui-g-12" style="background-color: #FFFFFF; font-size:2em; line-height: 1.5em;">
       <div class="ui-g-2"></div>
       <div class="ui-g-10" *ngIf="noResults && !sysError">
         <!-- <p-messages [(value)]="searchResultsError" style="text-align:center"></p-messages>
         <p-messages [(value)]="msgs" style="text-align:center;background-color: red"></p-messages> -->
-        Your search generates no results. Please click on <a href="#help" (click)="gaService.gaTrackPageview('/help', 'help')"> Search Rules</a> for more information.
+        Your search generates no results. Please click on <a href="#help"
+          (click)="gaService.gaTrackPageview('/help', 'help')"> Search Rules</a> for more information.
       </div>
       <div class="ui-g-10" *ngIf="sysError">
         Oops! It looks like our site had a problem completing your search. Please try again. If this error persists you
-        may contact <a
-          href="mailto:datasupport@nist.gov?subject=SDP: {{ searchValue }}&body= " (click)="gaService.gaTrackEvent('Email', $event, 'Contact')">datasupport@nist.gov</a>.
+        may contact <a href="mailto:datasupport@nist.gov?subject=SDP: {{ searchValue }}&body= "
+          (click)="gaService.gaTrackEvent('Email', $event, 'Contact')">datasupport@nist.gov</a>.
       </div>
     </div>
     <div class="EmptyBox80" style="background-color: #FFFFFF;"></div>
@@ -104,7 +131,8 @@
                     (onNodeSelect)="filterResults($event,'')">
                     <ng-template let-node pTemplate="default">
                       <span> {{node.label.split("-")[0]}}&nbsp;</span>
-                      <span class="w3-badge badge1" style="background-color: #515151;" *ngIf="node.label.split('-')[1] !=''">
+                      <span class="w3-badge badge1" style="background-color: #515151;"
+                        *ngIf="node.label.split('-')[1] !=''">
                         {{node.label.split("-")[1]}}</span>
                     </ng-template>
                   </p-tree>
@@ -119,7 +147,8 @@
                     (onNodeExpand)="nodeExpand($event)" (onNodeCollapse)="nodeCollapse($event)">
                     <ng-template let-node pTemplate="default">
                       <span> {{node.label.split("-")[0]}}&nbsp;</span>
-                      <span class="w3-badge badge1" style="background-color: #515151" *ngIf="node.label.split('-')[1] !=''">
+                      <span class="w3-badge badge1" style="background-color: #515151"
+                        *ngIf="node.label.split('-')[1] !=''">
                         {{node.label.split("-")[1]}}</span>
                     </ng-template>
                   </p-tree>
@@ -139,7 +168,8 @@
                     (onNodeExpand)="nodeExpand($event)" (onNodeCollapse)="nodeCollapse($event)">
                     <ng-template let-node pTemplate="default">
                       <span> {{node.label.split("-")[0]}}&nbsp;</span>
-                      <span class="w3-badge badge1" style="background-color: #515151" *ngIf="node.label.split('-')[1] !=''">
+                      <span class="w3-badge badge1" style="background-color: #515151"
+                        *ngIf="node.label.split('-')[1] !=''">
                         {{node.label.split("-")[1]}}</span>
                     </ng-template>
                   </p-tree>
@@ -156,7 +186,8 @@
                     (onNodeSelect)="filterResults($event,'')">
                     <ng-template let-node pTemplate="default">
                       <span> {{node.label.split("-")[0]}}&nbsp;</span>
-                      <span class="w3-badge badge1" style="background-color: #515151" *ngIf="node.label.split('-')[1] !=''">
+                      <span class="w3-badge badge1" style="background-color: #515151"
+                        *ngIf="node.label.split('-')[1] !=''">
                         {{node.label.split("-")[1]}}</span>
                     </ng-template>
                   </p-tree>
@@ -209,8 +240,8 @@
                   class="faa faa-angle-double-left" style="zoom: 100%;color: #fff;cursor: pointer;"></i></a>
               <a href="#" style="float: right;font-weight:900;vertical-align: middle;color: #FFFFFF"
                 (click)="$event.preventDefault();clearFilters()">
-                <i style="vertical-align: middle;zoom: 70%" class="material-icons"> clear
-                </i>Clear All</a>
+                <i class="faa faa-remove" style="zoom: 100%;color: #fff;cursor: pointer;"></i>
+                Clear All</a>
             </div>
             <div class="ui-g-12">
               <div style="border-bottom:.5px solid #e6e6e6;width: 100%;">
@@ -220,7 +251,8 @@
                   (onNodeSelect)="filterResults($event,'')">
                   <ng-template let-node pTemplate="default">
                     <span> {{node.label.split("-")[0]}}&nbsp;</span>
-                    <span class="w3-badge badge1" style="background-color: #1471AE;" *ngIf="node.label.split('-')[1] !=''">
+                    <span class="w3-badge badge1" style="background-color: #1471AE;"
+                      *ngIf="node.label.split('-')[1] !=''">
                       {{node.label.split("-")[1]}}</span>
                   </ng-template>
                 </p-tree>
@@ -256,7 +288,8 @@
                   (onNodeUnselect)="filterResults($event,'')" (onNodeSelect)="filterResults($event,'')">
                   <ng-template let-node pTemplate="default">
                     <span> {{node.label.split("-")[0]}}&nbsp;</span>
-                    <span class="w3-badge badge1" style="background-color: #1471AE" *ngIf="node.label.split('-')[1] !=''">
+                    <span class="w3-badge badge1" style="background-color: #1471AE"
+                      *ngIf="node.label.split('-')[1] !=''">
                       {{node.label.split("-")[1]}}</span>
                   </ng-template>
                 </p-tree>
@@ -267,13 +300,26 @@
                 </div>
               </div>
               <div style="border-bottom:.5px solid #e6e6e6;width: 100%;">
-                <p-tree [value]="componentsTree" selectionMode="checkbox" [style]="{'width':'auto','padding-top': '.5em','padding-right': '.5em',
-                          'padding-bottom': '.5em','background-color': '#F8F9F9'}"
-                  [(selection)]="selectedComponentsNode" (onNodeUnselect)="filterResults($event,'')"
-                  (onNodeSelect)="filterResults($event,'')">
+                <p-tree [value]="componentsTree" selectionMode="checkbox" 
+                  [style]="{'width':'auto','padding-top': '.5em','padding-right': '.5em',
+                          'padding-bottom': '.5em','background-color': '#F8F9F9'}" [(selection)]="selectedComponentsNode"
+                  (onNodeUnselect)="filterResults($event,'')" (onNodeSelect)="filterResults($event,'')">
+                  <!-- <ng-template let-rowNode let-rowData="rowData" let-i="rowIndex" pTemplate="body">
+                    <tr style="background: #FFFFFF">
+                        <td>
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                            &nbsp;<p-treeTableCheckbox [value]="rowNode"></p-treeTableCheckbox>
+                            <span> {{rowNode.label.split("-")[0]}}&nbsp;</span>
+                            <span class="w3-badge badge1" style="background-color: #1471AE"
+                              *ngIf="rowNode.label.split('-')[1] !=''">
+                              {{rowNode.label.split("-")[1]}}</span>
+                        </td>
+                    </tr>
+                  </ng-template> -->
                   <ng-template let-node pTemplate="default">
                     <span> {{node.label.split("-")[0]}}&nbsp;</span>
-                    <span class="w3-badge badge1" style="background-color: #1471AE" *ngIf="node.label.split('-')[1] !=''">
+                    <span class="w3-badge badge1" style="background-color: #1471AE"
+                      *ngIf="node.label.split('-')[1] !=''">
                       {{node.label.split("-")[1]}}</span>
                   </ng-template>
                 </p-tree>
@@ -325,38 +371,41 @@
         <div *ngIf="!searching" [className]="resultsClass" style="padding: 0px;background-color: #FFFFFF">
           <div class="ui-g ui-grid-responsive" style="padding: 0em;">
             <div class="ui-g-12" style="padding: 0em">
-              <div class="ui-g-12 ui-md-4 ui-sm-12">
-                <div style="color: #000;font-weight: 800;float: left;padding-top: 10px">
-                    &nbsp;&nbsp;{{filteredResults.length}} records found</div>
-              </div>
-              <div class="ui-g-12 ui-md-8 ui-sm-12">
-                <div style="float:left;padding-top:10px;">
-                    <pagination-controls (pageChange)="onPageChange($event); false"></pagination-controls>
+              <div class="wrap">
+                <div class="box" style="color: #000;font-weight: 800;padding-top: 10px; float: left;">
+                  &nbsp;&nbsp;{{filteredResults.length}} records found</div>
+                <div class="box" style="padding-top:10px;margin: 0 auto;">
+                  <pagination-controls (pageChange)="onPageChange($event); false"></pagination-controls>
                 </div>
-                <div style="float: right;padding-right:10px;padding-top:10px;">
-                  <button type="text" style="background-color: #606165;font-weight: 900" pButton
-                  (click)="op1.toggle($event)"><i class="faa faa-cog"></i> Customize Fields</button>
+                <div class="box" style="padding-right:10px;padding-top:10px;color: white;float: right;">
+                  <!-- <button type="button" style="background-color: #606165;font-weight: 900;color: white;" 
+                    (click)="op1.toggle($event)"><i class="faa faa-cog"></i> Customize Fields</button> -->
+                    <!-- <button (click)="op1.toggle($event)" style="background-color: #606165; color: white;border-radius: 5px;font-weight: 900;"><i class="faa faa-cog icon-white" style="padding-right: .5em;"></i>Customize Fields</button> -->
+                  <button pButton type="submit" class="btn btn-labeled" (click)="op1.toggle($event)"
+                    style="background-color: #606165; color: white;font-weight: 900; width: 100%;"
+                    label="Customize Fields" icon="faa faa-cog icon-white" iconPos="left">
+                  </button>
                   <p-overlayPanel #op1 [showCloseIcon]="true" [style]="{'background-color': '#F8F9F9'}">
                     <div style="width: 100%;margin-top:0em;text-align: left;">
-                        <p-checkbox inputId="group2" binary="true" [(ngModel)]="checked" (onChange)="SelectAllFields()"
+                      <p-checkbox inputId="group2" binary="true" [(ngModel)]="checked" (onChange)="SelectAllFields()"
                         [(ngModel)]="selectedFields"></p-checkbox>
-                        <b>Display Fields</b> <a href="#" (click)="$event.preventDefault();ResetSelectedFields()"
+                      <b>Display Fields</b> <a href="#" (click)="$event.preventDefault();ResetSelectedFields()"
                         style="float: right;"><i class="faa faa-refresh"></i> Reset</a>
                     </div>
                     <div style="text-align: left">
-                        <p-checkbox inputId="group2" binary="true" [(ngModel)]="checked" label="Select All"
+                      <p-checkbox inputId="group2" binary="true" [(ngModel)]="checked" label="Select All"
                         (onChange)="SelectAllFields()" [(ngModel)]="selectedFields"></p-checkbox>
                     </div>
                     <div *ngFor="let fields of displayFields" style="text-align: left">
-                        <p-checkbox inputId={{fields}} name={{fields}} class="label" value={{fields}} label={{fields}}
+                      <p-checkbox inputId={{fields}} name={{fields}} class="label" value={{fields}} label={{fields}}
                         [(ngModel)]="selectedFields"></p-checkbox>
                     </div>
                     <div style="border-top:.5px solid #e6e6e6;margin-top:5px;padding-top:5px;text-align: left">
-                        <b>Sort Results</b> <br>
-                        <p-dropdown [options]="fields" [(ngModel)]="sortItemKey" placeholder="Field Name"
+                      <b>Sort Results</b> <br>
+                      <p-dropdown [options]="fields" [(ngModel)]="sortItemKey" placeholder="Field Name"
                         (onChange)="SortByFields()"
                         [style]="{'width':'200px','display': 'flex','align-items':'center','background-color': '#FFFFFF','height': '40px','font-weight': '400','font-style': 'italic','float':'left'}">
-                        </p-dropdown>
+                      </p-dropdown>
                     </div>
                     <div class="EmptyBox20"></div>
                   </p-overlayPanel>
@@ -422,11 +471,16 @@
                       </div>
                       <div class="ui-grid-row">
                         <div class="ui-grid-col-12" style="margin-top:5px">
-                          <a *ngIf="resultItem.landingPage" [(href)]="resultItem.landingPage" target="_blank" (click)="gaService.gaTrackEvent('outbound', $event, 'Visit to homepage',resultItem.landingPage)">
-                            <button pButton label="Visit Home Page" type="button" icon="faa faa-external-link"
-                              style="font-size: 13px; width:150px; background-color: #277E2F"></button>
+                          <a *ngIf="resultItem.landingPage" [(href)]="resultItem.landingPage" target="_blank"
+                            (click)="gaService.gaTrackEvent('outbound', $event, 'Visit to homepage',resultItem.landingPage)">
+                            <!-- <button pButton label="Visit Home Page" type="button" icon="faa faa-external-link"
+                              style="font-size: 13px; width:150px; background-color: #277E2F"></button> -->
+                            <button pButton type="submit" class="btn btn-labeled" (click)="op1.toggle($event)"
+                              style="background-color: #277E2F; color: white;font-weight: 900; width: 150px;font-size: 13px;font-weight: normal;"
+                              label="Visit Home Page" icon="faa faa-external-link icon-white" iconPos="left"></button>
                           </a>
-                          <a *ngIf="!resultItem.landingPage" href="{{PDRAPIURL}}{{resultItem.ediid}}" target="_blank" (click)="gaService.gaTrackEvent('outbound', $event, 'Visit to homepage',resultItem.landingPage)">
+                          <a *ngIf="!resultItem.landingPage" href="{{PDRAPIURL}}{{resultItem.ediid}}" target="_blank"
+                            (click)="gaService.gaTrackEvent('outbound', $event, 'Visit to homepage',resultItem.landingPage)">
                             <button pButton label="Visit Home Page" type="button" icon="faa faa-external-link"
                               style="font-size: 13px; width:150px; background-color: #277E2F"></button>
                           </a>
@@ -438,19 +492,16 @@
               </div>
             </li>
           </ul>
-          <div class="ui-g-12" style="padding: 0em">
-            <div class="ui-g-12 ui-md-4 ui-sm-12">
-              <div style="color: #000;font-weight: 800;float: left;padding-top: 10px">
+          <div class="wrap">
+              <div class="box" style="color: #000;font-weight: 800;padding-top: 10px; float: left;">
                 &nbsp;&nbsp;{{filteredResults.length}} records found</div>
-            </div>
-            <div class="ui-g-12 ui-md-8 ui-sm-12">
-              <div style="float:left;padding-top:10px;">
+              <div class="box" style="padding-top:10px;margin: 0 auto;">
                 <pagination-controls (pageChange)="onPageChange($event); false"></pagination-controls>
               </div>
-              <div style="float: right;padding-right:10px;padding-top:10px;">
-                <button type="text" style="background-color: #606165;font-weight: 900" pButton
-                  (click)="op1.toggle($event)"><i class="faa faa-cog"></i> Customize Fields</button>
-              </div>
+              <div class="box" style="padding-right:10px;padding-top:10px;color: white;float: right;">
+                <button pButton type="submit" class="btn btn-labeled" (click)="op1.toggle($event)"
+                  style="background-color: #606165; color: white;font-weight: 900; width: 100%;"
+                  label="Customize Fields" icon="faa faa-cog icon-white" iconPos="left"></button>
             </div>
           </div>
         </div>

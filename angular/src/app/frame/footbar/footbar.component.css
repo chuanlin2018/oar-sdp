@@ -14,7 +14,8 @@
 }
 
 #footer .footer__logo img {
-  width: 286px;
+  width: 240px;
+  margin-left: 1.2em;
 }
 
 field-items img
@@ -43,6 +44,11 @@ img {
   line-height: 10px;
   border-bottom: .1px solid #202020;
   padding-bottom : .6rem;
+  margin-left: 1.5em;
+}
+
+.footer__address {
+  line-height: 12px;
 }
 
 .custom-icon:hover {
@@ -107,6 +113,7 @@ ul, menu, dir {
 
 #footer .social-links {
   float: right;
+  margin-right: 1em;
 }
 
 .social-btn--large {
@@ -150,7 +157,7 @@ a:visited {
 
 span.ext {
   display: inline-block;
-  padding-right: 0;
+  padding-right: 0px;
   text-indent: -99999px;
   width: 12px;
 }
@@ -172,7 +179,8 @@ span.ext {
 
 .menu--footer-menu {
   clear: both;
-   margin-bottom: 0.6rem;
+   margin-bottom: 0.3rem;
+   line-height: 18px;
 }
 
 
@@ -210,10 +218,10 @@ ul, menu, dir {
 .menu--footer-menu ul.menu li.first:before {
   content: none;
 }
-.menu--footer-menu ul.menu li:before {
+.menu--footer-menu ul.menu li:before{
   content: '|';
-  margin-left: 1.6px;
-  margin-left: 0.1rem;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
   display: inherit;
   position: static;
   font: inherit;
@@ -321,4 +329,3 @@ display: block;
 -webkit-margin-end: 0px;
 -webkit-padding-start: 40px;
 }
-

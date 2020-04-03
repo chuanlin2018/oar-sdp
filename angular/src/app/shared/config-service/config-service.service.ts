@@ -28,7 +28,8 @@ export class AppConfig {
   private confValues = {} as Config;
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID)
-  private platformId: Object, location: Location) { }
+  private platformId: Object) { 
+  }
 
   loadAppConfig() {
     if (isPlatformBrowser(this.platformId)) {
