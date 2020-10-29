@@ -14,6 +14,7 @@ import { AppConfig, Config } from '../shared/config-service/config-service.servi
 import { GoogleAnalyticsService } from '../shared/ga-service/google-analytics.service';
 import { SearchPanelComponent } from '../search-panel/search-panel.component';
 import { SDPQuery } from '../shared/search-query/query';
+import { JsonldService } from '../shared/jsonld-service/jsonld.service';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -163,7 +164,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     public searchQueryService: SearchQueryService,
     private actualRouter: Router,
     private appConfig: AppConfig,
-    public gaService: GoogleAnalyticsService) {
+    public gaService: GoogleAnalyticsService,
+    public jsonldService: JsonldService) {
 
       this.confValues = this.appConfig.getConfig();
       this.PDRAPIURL = this.confValues.PDRAPI;
@@ -176,6 +178,14 @@ export class SearchComponent implements OnInit, OnDestroy {
    * Get the params OnInit
    */
   ngOnInit() {
+    // For Schema.org
+    let angularRoute = this.location.path();
+    let url = window.location.href;
+    let domain = url.replace(angularRoute, '');
+
+    // Clean up any previously added Json-LD schema if any
+    this.jsonldService.removeStructuredData();
+
     window.onresize = (e) => {
         this.ngZone.run(() => {
           this.mobWidth = window.innerWidth;
@@ -199,8 +209,12 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.searchAuthors = params['authors'];
         this.searchKeywords = params['keywords'];
 
-    //searchValue is for UI display which should not be changed
-    //queryValue is for backend search
+        // Create JSON-LD for Advanced SEO
+        let targetURL = domain + "/search?q=" + this.searchValue;
+        this.jsonldService.insertSchema(this.jsonldService.searchSchema(window.location.href, "NIST", targetURL), 'structured-data-search');
+
+        //searchValue is for UI display which should not be changed
+        //queryValue is for backend search
         this.searchService.setQueryValue(this.searchValue, '', '');
 
         this.getFields();

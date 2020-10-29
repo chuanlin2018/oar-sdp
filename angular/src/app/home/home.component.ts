@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { JsonldService } from '../shared/jsonld-service/jsonld.service';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -11,6 +12,8 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 
 export class HomeComponent implements OnInit {
+    currentRoute: string;
+
     searchPhrases = {
         'IT': '"Information Technology"',
         'MS': '"Mathematics and Statistics"',
@@ -22,10 +25,12 @@ export class HomeComponent implements OnInit {
         'Chemistry': 'Chemistry'
     }
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public jsonldService: JsonldService) {
   }
 
   ngOnInit() {
+    this.jsonldService.removeStructuredData();
+    this.jsonldService.insertSchema(this.jsonldService.websiteSchema(window.location.href, "NIST"));
   }
 
   /**
