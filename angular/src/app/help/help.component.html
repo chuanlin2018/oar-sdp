@@ -1,5 +1,5 @@
 <!-- Top banner -->
-<div class="ui-g top-banner" [ngStyle]="{ 'background-image': 'url(' + imageURL + ')'}">
+<div class="p-col top-banner" [ngStyle]="{ 'background-image': 'url(' + imageURL + ')'}">
   <div style="display: block; width: 100%;">
     <span style="font-size: xx-large;">
     <i class="faa faa-question faa-lg" style="padding-right: .5em;"></i><label id='title'>Help</label>
@@ -14,10 +14,10 @@
 
 <div class="sdp-help-page">
   <div class="card">
-    <div class="ui-g">
-      <div class="ui-g-12">
+    <div class="p-col">
+      <div class="p-col-12">
 
-        <div class="ui-g-12 ui-md-3 ui-lg-3 help-menu">
+        <div class="p-col-12 p-md-3 p-lg-3 help-menu">
           <ul class="links">
 
             <li class="links" [ngClass]="{'current':currentView === 'how-advanced-search'}"
@@ -39,7 +39,7 @@
           </ul>
         </div>
 
-        <div class="ui-g-12 ui-md-9 ui-lg-9 help-content" [ngSwitch]="true">
+        <div class="p-col-12 p-md-9 p-lg-9 help-content" [ngSwitch]="true">
           <div *ngSwitchCase="currentView === 'how-advanced-search'">
             <how-advanced-search></how-advanced-search>
           </div>

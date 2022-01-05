@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject} from 'rxjs/Subject';
-import {BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {BehaviorSubject } from 'rxjs';
 import {Observable } from 'rxjs';
-import * as _ from 'lodash';
-import { SelectItem, TreeNode, TreeModule } from 'primeng';
+import * as _ from 'lodash-es';
+import { SelectItem } from 'primeng/api';
+import { TreeModule } from 'primeng/tree';
+import { TreeNode } from 'primeng/api';
 import 'rxjs/add/operator/toPromise';
 import { SDPQuery, QueryRow, CurrentQueryInfo } from './query';
 import { SearchfieldsListService } from '../../shared/searchfields-list/index';

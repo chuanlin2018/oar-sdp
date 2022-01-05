@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+                "rxjs-compat"
+            ],
             "aot": true,
             "outputPath": "dist/angular",
             "index": "src/index.html",
@@ -25,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
               "src/styles/font-awesome/css/font-awesome.min.css",
               "node_modules/primeng/resources/primeng.css",
               "node_modules/primeicons/primeicons.css",
@@ -34,10 +37,11 @@
               "src/styles/styles.layout.css",
               "src/styles/styles.themes.css",
               "src/assets/fontcss/roboto.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": [
-              "node_modules/lodash/lodash.min.js",
+              "node_modules/lodash-es/lodash.js",
               "node_modules/jspdf/dist/jspdf.min.js",
               "node_modules/primeui/primeui-ng-all.min.js"
             ]
@@ -118,7 +122,7 @@
               "src/styles/main.css"
             ],
             "scripts": [
-              "node_modules/lodash/lodash.min.js",
+              "node_modules/lodash-es/lodash.js",
               "node_modules/jspdf/dist/jspdf.min.js",
               "node_modules/primeui/primeui-ng-all.min.js"
             ],

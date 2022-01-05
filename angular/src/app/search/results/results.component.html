@@ -2,7 +2,7 @@
 
     <!-- Handle no search result -->
     <div *ngIf="resultStatus == RESULT_STATUS.noResult || totalItems == 0">
-        <div class="ui-g-12" style="background-color: #FFFFFF; font-size:2em; line-height: 1.5em;">
+        <div class="p-col-12" style="background-color: #FFFFFF; font-size:2em; line-height: 1.5em;">
 
             There are no records that match your search query. 
 
@@ -12,7 +12,7 @@
 
     <!-- Handle user error -->
     <div *ngIf="resultStatus == RESULT_STATUS.userError">
-        <div class="ui-g-12" style="background-color: #FFFFFF; font-size:2em; line-height: 1.5em;">
+        <div class="p-col-12" style="background-color: #FFFFFF; font-size:2em; line-height: 1.5em;">
 
                 There is a syntax error in your search input. Please review your search input and correct the error. Click on <span class="link-text" (click)="showExamples()"> Show Examples</span> for how to construct your search. 
 
@@ -22,7 +22,7 @@
 
     <!-- Handle sys error -->
     <div *ngIf="resultStatus == RESULT_STATUS.sysError">
-        <div class="ui-g-12" style="background-color: #FFFFFF; font-size:2em; line-height: 1.5em;">
+        <div class="p-col-12" style="background-color: #FFFFFF; font-size:2em; line-height: 1.5em;">
 
                 Oops! It looks like our site had a problem completing your search. If this error persists you
                 may contact <a
@@ -45,9 +45,14 @@
 
             <!-- Display Fields config -->
             <div [ngClass]="flexgrow(1)" style="padding:5px 10px 5px 0px;">
-                <button type="text" class="controlBtn" [ngStyle]="{'float': customizeViewPosition()}"
-                    pButton (click)="op1.toggle($event)"><i class="faa faa-cog"></i> Customize
-                    View</button>
+                <button type="text" 
+                        label="Customize View" 
+                        class="controlBtn" 
+                        [ngStyle]="{'float': customizeViewPosition()}"
+                        pButton 
+                        (click)="op1.toggle($event)">
+                    <i class="faa faa-cog" style="padding-right: 10px;"></i> 
+                </button>
                 <p-overlayPanel #op1 for="controlBtn" [showCloseIcon]="true" [style]="{'background-color': '#F8F9F9'}" [appendTo]="'body'">
                     <div class="lbl-display-fields">
                         <b>Display Fields</b>
@@ -84,7 +89,7 @@
 
         <!-- Search result -->
         <div *ngFor="let resultItem of searchResults">
-            <div class="ui-g ui-grid-responsive"
+            <div class="p-col ui-grid-responsive"
             style="padding:10px;border-bottom:.5px solid #e6e6e6;">
                 <div class="ui-grid-row nowrap" style="width: 100%;">
                     <div class="ui-grid-col-12" style="width: 100%;">
@@ -168,14 +173,14 @@
                                         (click)="gaService.gaTrackEvent('outbound', $event, 'Visit to homepage',resultItem.landingPage)">
                                         <button pButton label="Visit Home Page" type="button"
                                             icon="faa faa-external-link"
-                                            style="font-size: 13px; width:180px; background-color: #277E2F"></button>
+                                            style="font-size: 13px; width:160px; height: 1.5em;background-color: #277E2F"></button>
                                     </a>
                                     <a *ngIf="!resultItem.landingPage"
                                         href="{{PDRAPIURL}}{{resultItem.ediid}}" target="_blank"
                                         (click)="gaService.gaTrackEvent('outbound', $event, 'Visit to homepage',resultItem.landingPage)">
                                         <button pButton label="Visit Home Page" type="button"
                                             icon="faa faa-external-link"
-                                            style="font-size: 13px; width:180px; background-color: #277E2F"></button>
+                                            style="font-size: 13px; width:160px; height: 1.5em;background-color: #277E2F"></button>
                                     </a>
                                 </div>
                             </div>

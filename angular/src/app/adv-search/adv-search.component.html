@@ -11,9 +11,9 @@
     jumbotronHeight='27vh' jumbotronPadding='2em 2em 0em 2em'></app-search-panel>
 
 <div class="ui-fluid" style="background-color: #EFEFEF">
-    <div class="ui-g ">
+    <div class="grid">
         <p-confirmDialog key="queryDelete"></p-confirmDialog>
-        <div class="ui-g-12 ui-md-3 ui-lg-3 collapse1 in width" id="left-panel">
+        <div class="col-3 p-md-3 p-lg-3 collapse1 in width" id="left-panel">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -66,7 +66,7 @@
             </table>
 
             <div>
-                <div class="ui-g-12 ui-md-12" style="text-align: center;">
+                <div class="p-col-12 p-md-12" style="text-align: center;">
                     <input type="file" id="file" #fileupload (change)="importList($event)" style="visibility: hidden;">
 
                     <button type="button" class="file-io btn btn-sm btn-primary" (click)="fileupload.value=''; fileupload.click();"
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div [className]="resultsClass" style="background-color:white">
+        <div [className]="resultsClass" style="background-color:white; padding: 20px;">
             <!-- free text input -->
             <div style="margin: 1em 0 .5em 0;">
                 <label for="freeText" class="free-text-lable">Terms/Phrases:</label>
@@ -152,22 +152,19 @@
                 </tbody>
             </table>
 
-            <div class="ui-g-12 search-builder-background">
-                <div class="ui-g-12 ui-lg-8 ui-md-12 ui-sm-12" style="float:right;">
-                    <button id="btn-cancel" type="button" (click)="clearConfirm()" pButton type="submit">
+            <div class="p-col-12 search-builder-background">
+                <div class="p-col-12 p-lg-8 p-md-12 p-sm-12" style="float:right;">
+                    <button id="btn-cancel" label="Clear" type="button" (click)="clearConfirm()" pButton type="submit">
                         <i class="faa faa-remove faa-1x icon-white" style="color: #fff;"></i>
-                        Clear
                     </button>
 
-                    <button id="btn-save" type="button" (click)="confirmSaveAdvSearchQuery($event, op5)" pButton type="submit">
+                    <button id="btn-save" label="Save" type="button" (click)="confirmSaveAdvSearchQuery($event, op5)" pButton type="submit">
                         <i class="faa faa-save faa-1x icon-white" style="color: #fff;"></i>
-                        Save
                     </button>
 
-                    <button id="btn-execute" type="button" (click)="$event.preventDefault();executeQuery(currentQuery,currentQueryIndex)" pButton type="submit"
+                    <button id="btn-execute" label="Search" type="button" (click)="$event.preventDefault();executeQuery(currentQuery,currentQueryIndex)" pButton type="submit"
                         [disabled]="rowInputValidateError">
                         <i class="faa faa-play faa-1x icon-white" style="color: #fff;"></i>
-                        Search
                     </button>
                 </div>
             </div>

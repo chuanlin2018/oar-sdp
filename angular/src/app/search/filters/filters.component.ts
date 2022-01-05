@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject, Input, AfterViewInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { SelectItem } from 'primeng';
+import { SelectItem } from 'primeng/api';
 import {TreeNode} from 'primeng/api';
 // import { Message } from 'primeng/components/common/api';
-import { Message } from 'primeng';
+import { Message } from 'primeng/api';
 import { SDPQuery } from '../../shared/search-query/query';
 import { SearchService, SEARCH_SERVICE } from '../../shared/search-service';
 import { SearchQueryService } from '../../shared/search-query/search-query.service';
 import { TaxonomyListService, SearchfieldsListService } from '../../shared/index';
-import * as _ from 'lodash';
+import * as _ from 'lodash-es';
 
 @Component({
   selector: 'app-filters',

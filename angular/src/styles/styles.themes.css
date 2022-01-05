@@ -176,7 +176,7 @@ body .ui-datatable .ui-datatable-thead > tr th {
   color:#ffffff;
 }
 
-body .ui-dialog .ui-dialog-titlebar {
+body .p-dialog .p-dialog-titlebar {
   background-color:#232F3E;
   color:#ffffff;
 }
