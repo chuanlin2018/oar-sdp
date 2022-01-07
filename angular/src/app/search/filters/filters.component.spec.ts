@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 import { FiltersComponent } from './filters.component';
-import { TreeModule, AutoCompleteModule } from 'primeng';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TreeModule } from 'primeng/tree';
 import { MockModule } from '../../mock.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -12,7 +13,7 @@ describe('FiltersComponent', () => {
     let fixture: ComponentFixture<FiltersComponent>;
     let searchResult = require('../../../assets/sample02.json').ResultData;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
         declarations: [ FiltersComponent ],
         imports: [

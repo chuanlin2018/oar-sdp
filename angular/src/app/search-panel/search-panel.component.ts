@@ -7,7 +7,7 @@ import { SearchService, SEARCH_SERVICE } from '../shared/search-service';
 import { Router, NavigationExtras } from '@angular/router';
 import * as _ from 'lodash-es';
 import { AppConfig, Config } from '../shared/config-service/config-service.service';
-import { timer } from 'rxjs/observable/timer';
+import { timer } from 'rxjs';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { AdvSearchComponent } from '../adv-search/adv-search.component';
