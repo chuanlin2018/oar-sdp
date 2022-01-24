@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Renderer2 } from '@angular/core';
 import { HeadbarComponent } from './headbar.component';
 import { OverlayPanelModule } from "primeng/overlaypanel";

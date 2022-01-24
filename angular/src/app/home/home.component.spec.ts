@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, APP_INITIALIZER } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { RouterTestingModule } from '@angular/router/testing';

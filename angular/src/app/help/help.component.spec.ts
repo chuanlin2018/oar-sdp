@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HelpComponent } from './help.component';
 import { ContactUsComponent } from "./contact-us/contact-us.component";

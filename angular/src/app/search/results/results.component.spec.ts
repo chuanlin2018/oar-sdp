@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync  } from '@angular/core/testing';
 import { ResultsComponent } from './results.component';
 import { TreeModule } from 'primeng/tree';
 import { AutoCompleteModule } from 'primeng/autocomplete';
